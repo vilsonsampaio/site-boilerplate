@@ -19,8 +19,7 @@ function joinCSSPlugins() {
 }
 
 // gulp task for join plugins style files
-gulp.task('css-plugins', joinCSSPlugins);
-
+exports.joinCSSPlugins = joinCSSPlugins;
 
 // function to compile sass and add prefixes
 function compileSass() {
@@ -40,7 +39,7 @@ function compileSass() {
 }
 
 // gulp task for the sass function
-gulp.task('sass', compileSass);
+exports.compileSass = compileSass;
 
 
 function joinJSPlugins() {
@@ -54,7 +53,7 @@ function joinJSPlugins() {
 }
 
 // gulp task for join plugins script files
-gulp.task('js-plugins', joinJSPlugins);
+exports.joinJSPlugins = joinJSPlugins;
 
 
 // function to join the internal script files
@@ -72,7 +71,7 @@ function joinJS() {
 }
 
 // gulp task for join internal js files
-gulp.task('scripts', joinJS);
+exports.joinJS = joinJS;
 
 
 // function to init browser server
@@ -85,7 +84,7 @@ function createServer() {
 }
 
 // gulp task for init browser-sync
-gulp.task('browser-sync', createServer);
+exports.createServer = createServer;
 
 
 // gulp function to watch changes on files
@@ -107,15 +106,15 @@ function watchGulp() {
 }
 
 // gulp task for watch
-gulp.task('watch', watchGulp); 
+exports.watchGulp = watchGulp; 
 
 
 // default task that will be executed when called "gulp" on terminal
-gulp.task('default', gulp.parallel(
-  'watch', 
-  'css-plugins', 
-  'sass', 
-  'js-plugins',
-  'scripts', 
-  'browser-sync'
-));
+exports.default = gulp.parallel(
+  watchGulp,
+  joinCSSPlugins,
+  compileSass,
+  joinJSPlugins,
+  joinJS,
+  createServer 
+);
