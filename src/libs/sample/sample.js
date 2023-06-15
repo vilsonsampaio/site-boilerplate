@@ -1,1 +1,1 @@
-alert('Insert a plugin script file');
+// alert('Insert a plugin script file');
